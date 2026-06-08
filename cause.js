@@ -31,23 +31,19 @@ window.addEventListener('load', runPageEnterTransition);
  const reasons = [
     { 
         text: "May Allah keep us together in jannah, fid duniya wal akhirah 🫀", 
-        emoji: "🌟",
-        gif: "gif1.gif"
+        emoji: "🌟"
     },
     { 
         text: "Lazmi hain tere chehre par Til ka hona, Khubsurat chehro par pahredarri bhi zaruri hain! ", 
-        emoji: "💗",
-        gif: "gif2.gif"
+        emoji: "💗"
     },
     { 
         text: "Tujhe nazar andaz karu Mujh mein itna guroor kaha, Aur tumhe dekhu nazar bhar kar Meri aakhon mein itna noor kaha! ✨ ", 
-        emoji: "💕",
-        gif: "gif1.gif"
+        emoji: "💕"
     },
     { 
         text: "Shiddat aur bhi shadeed hote ja rahi hai Aapse mohabbat aur bhi mazeed hote ja rahi hai, Dil toh tha hi aapka deewana jana Ab toh rooh bhi aapki deewani hote ja rahi ha 🥳 ", 
-        emoji: "🌟",
-        gif: "gif2.gif"
+        emoji: "🌟"
     }
 ];
 
@@ -58,7 +54,7 @@ const shuffleButton = document.querySelector('.shuffle-button');
 const reasonCounter = document.querySelector('.reason-counter');
 let isTransitioning = false;
 
-// Create reason card with gif
+// Create reason card
 function createReasonCard(reason) {
     const card = document.createElement('div');
     card.className = 'reason-card';
@@ -67,18 +63,7 @@ function createReasonCard(reason) {
     text.className = 'reason-text';
     text.innerHTML = `${reason.emoji} ${reason.text}`;
     
-    const gifOverlay = document.createElement('div');
-    gifOverlay.className = 'gif-overlay';
-    gifOverlay.innerHTML = `<img src="${reason.gif}" alt="Friendship Memory">`;
-    
     card.appendChild(text);
-    card.appendChild(gifOverlay);
-
-    card.addEventListener('click', () => {
-        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            gifOverlay.classList.toggle('visible');
-        }
-    });
     
     gsap.from(card, {
         opacity: 0,
