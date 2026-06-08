@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Our Beautiful Memories ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 209, 220, 0.82) 0%,
+                    rgba(230, 230, 250, 0.78) 50%,
+                    rgba(255, 239, 213, 0.82) 100%),
+                url('./20260104_175222.jpg') center 40% / auto 90vh no-repeat;
+            background-attachment: fixed;
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            color: #4a4a4a;
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Enhanced Sparkle Effect */
+        .magic-sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: white;
+            animation: twinkle var(--duration, 4s) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+        }
+
+        /* Generate 50 sparkles with different positions and animations */
+        .magic-sparkles::before,
+        .magic-sparkles::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, white 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: sparkleLayer 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        .magic-sparkles::after {
+            animation-delay: -4s;
+            transform: rotate(45deg);
+        }
+
+        @keyframes sparkleLayer {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50px);
+            }
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 105, 180, 0.6);
+            animation: floatHeart var(--float-duration, 6s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translate(0, 100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(var(--translate-x, 0), -100vh) rotate(360deg);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome {
+            text-align: center;
+            padding: 3rem 1.25rem 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .welcome h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 9vw, 4rem);
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInScale 2s ease;
+            line-height: 1.2;
+        }
+
+        .welcome p {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            max-width: 600px;
+            margin: 1.25rem auto 0;
+            line-height: 1.6;
+            animation: fadeIn 2s ease 0.5s both;
+            padding: 0 0.5rem;
+        }
+
+        /* Enhanced Memory Cards */
+        .memory-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            z-index: 3;
+            position: relative;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .memory-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .memory-img {
+            width: 100%;
+            height: clamp(200px, 55vw, 250px);
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: transform 0.5s ease;
+        }
+
+        .memory-card:nth-child(1) .memory-img {
+            object-position: center 30%;
+        }
+
+        .memory-card:nth-child(2) .memory-img {
+            object-position: center 35%;
+        }
+
+        .memory-card:nth-child(3) .memory-img {
+            object-position: center 35%;
+        }
+
+        .memory-card:hover .memory-img {
+            transform: scale(1.05);
+        }
+
+        .memory-date {
+            font-family: 'Dancing Script', cursive;
+            color: #ff69b4;
+            font-size: clamp(1.1rem, 4.5vw, 1.3rem);
+            margin-bottom: 0.75rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .memory-caption {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: clamp(0.95rem, 3.8vw, 1rem);
+            line-height: 1.65;
+            color: #666;
+            padding: 0.5rem 0.25rem;
+        }
+
+        .memory-caption--poem {
+            font-size: clamp(0.88rem, 3.4vw, 0.95rem);
+            line-height: 1.75;
+        }
+
+        /* Final Message Section */
+        .final-message {
+            text-align: center;
+            padding: 2.5rem 1.25rem 3rem;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .final-message h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: #ff69b4;
+            margin-bottom: 1.5rem;
+            animation: heartbeat 2s infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .final-message p {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto 1.25rem;
+            line-height: 1.7;
+            padding: 0 0.25rem;
+        }
+
+        .goodbye-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.75rem;
+            min-height: 48px;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            animation: float 3s infinite ease-in-out;
+            touch-action: manipulation;
+        }
+
+        .goodbye-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Generate Hearts */
+        .js-generate-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            border-radius: 6px;
+        }
+
+        .music-toggle {
+            position: fixed;
+            right: max(1rem, env(safe-area-inset-right));
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 4px 14px rgba(255, 105, 180, 0.35);
+            font-size: 1.25rem;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 18px rgba(255, 105, 180, 0.45);
+        }
+
+        .music-toggle.is-playing {
+            background: linear-gradient(45deg, #ff69b4, #da70d6);
+        }
+
+        .music-hint {
+            position: fixed;
+            right: max(1rem, env(safe-area-inset-right));
+            bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 58px);
+            z-index: 100;
+            padding: 0.5rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #ff69b4;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .music-hint.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 769px) {
+            .memory-container {
+                padding: 2rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                align-items: stretch;
+            }
+
+            .memory-card {
+                padding: 1.5rem;
+            }
+
+            .memory-caption {
+                min-height: 9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+                background-size: auto 100vh;
+            }
+
+            .memory-card:hover {
+                transform: none;
+            }
+
+            .memory-card:active {
+                transform: scale(0.98);
+            }
+
+            .memory-card:hover .memory-img {
+                transform: none;
+            }
+
+            .heart {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .welcome h1,
+            .final-message h2,
+            .goodbye-btn,
+            .heart,
+            .magic-sparkles::before,
+            .magic-sparkles::after {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="bg-music" loop preload="auto">
+        <source src="./bg-music.mp3" type="audio/mpeg">
+        <source src="./bg-music.m4a" type="audio/mp4">
+    </audio>
+
+    <button class="music-toggle is-playing" type="button" aria-label="Mute background music" title="Mute music">🔊</button>
+    <div class="music-hint" id="music-hint">Tap for music 🎵</div>
+
+    <div class="magic-sparkles"></div>
+    <div class="floating-hearts">
+        <!-- Hearts will be generated via CSS -->
+        <div class="heart" style="--float-duration: 6s; --delay: 0s; --translate-x: 20px;">💝</div>
+        <div class="heart" style="--float-duration: 8s; --delay: 1s; --translate-x: -30px;">💖</div>
+        <div class="heart" style="--float-duration: 7s; --delay: 2s; --translate-x: 40px;">💗</div>
+        <div class="heart" style="--float-duration: 9s; --delay: 3s; --translate-x: -20px;">💓</div>
+        <div class="heart" style="--float-duration: 5s; --delay: 4s; --translate-x: 30px;">💕</div>
+    </div>
+
+    <section class="welcome">
+        <h1>Our Beautiful Moments Together</h1>
+        <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
+    </section>
+
+    <div class="memory-container">
+        <div class="memory-card">
+            <img src="./first.jpg" alt="First Date" class="memory-img">
+            <div class="memory-date">Tera pehla deedaar</div>
+            <div class="memory-caption memory-caption--poem">
+                Yaad Hai Mujhe Wo Pehli Mulakat,<br>
+                Jaise Ho Barsat Ki Koi Raat,<br>
+                Wo Tera Dhire Se Muskurana,<br>
+                Mujhe Dekh Ke Yun Nazarein Churana,<br>
+                Phir Mujhe Dekh Ke Yun Andekha Kar Jana,<br>
+                Yaad Hai Mujhe Wo Tera Kareeb Anaa. ❤️
+            </div>
+        </div>
+        <div class="memory-card">
+            <img src="./second.jpg" alt="Beach Day" class="memory-img">
+            <div class="memory-date">Tera mujhe yu dekhna</div>
+            <div class="memory-caption">
+                The way you look at me makes me forget how ordinary I am;<br>
+                In your eyes, I see a love I never believed could be mine. 😊💕
+            </div>
+        </div>
+        <div class="memory-card">
+            <img src="./third.jpg" alt="Movie Night" class="memory-img">
+            <div class="memory-date">Mera Chaand</div>
+            <div class="memory-caption">
+                Sitaaron ki mehfil mein,<br>
+                faqat tum hi mera noorani chaand ho. 🌸💖
+            </div>
+        </div>
+
+    </div>
+
+    <section class="final-message">
+        <h2>Thank You for the Memories</h2>
+        <p>Every laugh, every chat, and every moment we’ve shared has been truly special.💫<br>
+            I’m so grateful for the bond we have, and for the positivity you always bring into my life.<br>
+            On your birthday, I just wish for endless happiness, love, and success to come your way.🌸</p>
+        <p>You deserve all the joy in the world—keep shining and spreading your beautiful energy.✨</p>
+        <a href="#" class="goodbye-btn">Until We Meet Again 💝</a>
+    </section>
+
+    <script>
+        (function () {
+            const music = document.getElementById('bg-music');
+            const toggle = document.querySelector('.music-toggle');
+            const hint = document.getElementById('music-hint');
+
+            music.volume = 0.4;
+            music.muted = false;
+
+            function setSoundOn(isOn) {
+                music.muted = !isOn;
+                toggle.classList.toggle('is-playing', isOn);
+                toggle.textContent = isOn ? '🔊' : '🔇';
+                toggle.setAttribute('aria-label', isOn ? 'Mute background music' : 'Unmute background music');
+                toggle.setAttribute('title', isOn ? 'Mute music' : 'Unmute music');
+            }
+
+            function hideHint() {
+                hint.classList.remove('visible');
+            }
+
+            function showHint() {
+                hint.classList.add('visible');
+                setTimeout(hideHint, 4000);
+            }
+
+            async function startMusic() {
+                if (!music.paused) return;
+                music.muted = false;
+                try {
+                    await music.play();
+                    setSoundOn(true);
+                    hideHint();
+                } catch {
+                    showHint();
+                }
+            }
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (music.muted) {
+                    music.muted = false;
+                    if (music.paused) {
+                        music.play().then(() => setSoundOn(true)).catch(showHint);
+                    } else {
+                        setSoundOn(true);
+                    }
+                } else {
+                    setSoundOn(false);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.music-toggle')) return;
+                if (music.paused) startMusic();
+            });
+
+            document.addEventListener('touchstart', () => {
+                if (music.paused) startMusic();
+            }, { once: true, passive: true });
+
+            music.addEventListener('play', () => setSoundOn(!music.muted));
+            music.addEventListener('pause', () => {
+                if (music.muted) setSoundOn(false);
+            });
+
+            window.addEventListener('load', startMusic);
+        })();
+    </script>
+</body>
+
+</html>
